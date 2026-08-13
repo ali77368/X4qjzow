@@ -941,3 +941,12 @@ async def test_ws_redirect():
 
 if __name__ == "__main__":
     uvicorn.run("main:app", host="0.0.0.0", port=CONFIG["port"], log_level="info", workers=1)
+    from xray_manager import (
+    sync_xray,
+    stop_xray,
+    vmess_ws_bridge,
+    trojan_ws_bridge,
+)
+
+app.add_api_websocket_route("/vmess/{uuid}", vmess_ws_bridge)
+app.add_api_websocket_route("/trojan/{uuid}", trojan_ws_bridge)
